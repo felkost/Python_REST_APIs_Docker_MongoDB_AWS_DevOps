@@ -1,0 +1,17 @@
+[project]
+name = "python-rest-apis-docker-mongodb-aws-devops"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "felk", email = "felkost@ukr.net" }
+]
+requires-python = ">=3.12"
+dependencies = []
+
+[project.scripts]
+python-rest-apis-docker-mongodb-aws-devops = "python_rest_apis_docker_mongodb_aws_devops:main"
+
+[build-system]
+requires = ["uv_build>=0.9.27,<0.10.0"]
+build-backend = "uv_build"
