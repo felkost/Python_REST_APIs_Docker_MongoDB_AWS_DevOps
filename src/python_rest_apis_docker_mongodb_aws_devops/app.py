@@ -7,7 +7,7 @@ api = Api(app)
 def checkPostedData(postedData, functionName):
     if (functionName == "inc"):
         if "x" not in postedData:
-            return 401 #Missing parameter
+            return 400 #Missing parameter
         else:
             return 200
         
@@ -50,10 +50,10 @@ def r_post():
     if x is not None:
         return {'result': x + 1}, 200#jsonify({'result': x + 1})
     else:
-        return jsonify({'error': 'Missing "x" in request data'}), 305      
+        return jsonify({'error': 'Missing "x" in request data'}), 400      
     return "Received POST request!"
 
 api.add_resource(Increament, "/inc")
 
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=5000)
+    app.run(host="0.0.0.0", port=5000)
