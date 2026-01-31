@@ -7,7 +7,11 @@ authors = [
     { name = "felk", email = "felkost@ukr.net" }
 ]
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "flask>=3.1.2",
+    "flask-restful>=0.3.10",
+    "python-dotenv>=1.2.1",
+]
 
 [project.scripts]
 python-rest-apis-docker-mongodb-aws-devops = "python_rest_apis_docker_mongodb_aws_devops:main"
