@@ -11,24 +11,24 @@ if not MONGO_URI:
     raise RuntimeError("MONGO_URI is not set")
 client = MongoClient(MONGO_URI)
 db = client.get_database()  # або get_default_database, якщо в URI є /dbname
-calls = db["inc_calls"] # collection to store inc calls
+calls = db["visit_calls"] # collection to store inc visits
 
 def checkPostedData(postedData, functionName):
-    if (functionName == "inc"):
+    if (functionName == "visit"):
         if "x" not in postedData:
             return 400 #Missing parameter
         else:
             return 200
         
-class Increament(Resource):
+class Visit(Resource):
     def post(self):
-        #If I am here, then the resouce Increament was requested using the method POST
+        #If I am here, then the resouce Visit was requested using the method POST
 
         #Step 1: Get posted data:
         postedData = request.get_json()
 
         #Steb 1b: Verify validity of posted data
-        status_code = checkPostedData(postedData, "inc")
+        status_code = checkPostedData(postedData, "visit")
 
         if (status_code!=200):
             retJson = {
@@ -44,10 +44,10 @@ class Increament(Resource):
         ret = x + 1
         
         if calls is not None:
-            calls.insert_one({"x": x, "result": ret})
+            calls.insert_one({"x": x, "visits": ret})
             
         retMap = {
-            'Message': ret,
+            'Message (visits)': ret,
             'Status Code': 200
         }
         return retMap#jsonify(retMap)
@@ -66,7 +66,7 @@ def r_post():
         return jsonify({'error': 'Missing "x" in request data'}), 400      
     return "Received POST request!"
 
-api.add_resource(Increament, "/inc")
+api.add_resource(Visit, "/visit")
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=5000)
